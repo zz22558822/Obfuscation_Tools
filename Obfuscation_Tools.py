@@ -1,4 +1,3 @@
-import os
 import subprocess
 import sys
 from pathlib import Path
@@ -43,6 +42,13 @@ def main():
         sys.exit(1)
 
     target = input("請輸入要混淆的檔案或資料夾路徑：").strip()
+
+    # 移除路徑中的引號
+    if target.startswith('"') and target.endswith('"'):
+        target = target[1:-1]
+    elif target.startswith("'") and target.endswith("'"):
+        target = target[1:-1]
+
     path = Path(target)
 
     if not path.exists():
